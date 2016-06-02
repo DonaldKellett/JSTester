@@ -57,5 +57,17 @@ var Test = {
       this.output += "<span style='color:red'>" + e + "</span>";
     }
     this.output += "</div>";
+  },
+  // Basic Test Method
+  expect: function (passed, msg, success) {
+    msg = msg || "Value was not what was expected";
+    success = success || "Test Passed";
+    if (passed) {
+      this.passes++;
+      this.output += "<span style='color:lime'>" + success + "</span><br />";
+    } else {
+      this.fails++;
+      this.output += "<span style='color:red'>" + msg + "</span><br />";
+    }
   }
 };
