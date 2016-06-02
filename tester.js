@@ -14,5 +14,11 @@ var Test = Object.freeze({
       token += "abcdefghijklmnopqrstuvwxyz0123456789".split("")[~~(36 * Math.random())];
     }
     return token;
+  },
+  // Spec Methods
+  describe: function (msg, fn) {
+    var uniqId = this.randomToken();
+    msg = msg || "The code to be tested";
+    this.write("<div id='console_" + uniqId + "' style='color:white;background-color:black;padding:10px;font-family:monospace'>" + "<strong>" + msg + "</strong>" + "<div id='describe_" + uniqId + "' style='margin-left:20px'>" + "PLACEHOLDER - FILL THIS IN LATER" + "</div>" + "</div>");
   }
 });
