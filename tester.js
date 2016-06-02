@@ -3,6 +3,7 @@ var Test = {
   passes: 0,
   fails: 0,
   errors: 0,
+  output: "",
   // Test Output Method
   write: function (output) {
     document.getElementsByTagName("body")[0].innerHTML += output;
@@ -24,25 +25,37 @@ var Test = {
     var uniqId = this.randomToken();
     msg = msg || "The code to be tested";
     this.passes = this.fails = this.errors = 0;
-    var output = "<div id='console_" + uniqId + "' style='color:white;background-color:black;padding:10px;font-family:monospace'>";
-    output += "<strong>" + msg + "</strong>";
-    output += "<div id='describe_" + uniqId + "' style='margin-left:20px'>";
+    this.output = "<div id='console_" + uniqId + "' style='color:white;background-color:black;padding:10px;font-family:monospace'>";
+    this.output += "<strong>" + msg + "</strong>";
+    this.output += "<div id='describe_" + uniqId + "' style='margin-left:20px'>";
     var start = new Date().getTime();
     try {
       fn();
     } catch (e) {
       this.errors++;
-      output += "<span style='color:red'>" + e + "</span>";
+      this.output += "<span style='color:red'>" + e + "</span>";
     }
     var dur = new Date().getTime() - start;
-    output += "</div>";
-    output += "<hr />";
-    output += "<span style='color:lime'>" + this.passes + " Passes</span><br />";
-    output += "<span style='color:red'>" + this.fails + " Fails</span><br />";
-    output += "<span style='color:red'>" + this.errors + " Errors</span><br />";
-    output += "Process took " + dur + "ms to complete<br />"
-    output += "</div>";
-    this.write(output + "<br />");
+    this.output += "</div>";
+    this.output += "<hr />";
+    this.output += "<span style='color:lime'>" + this.passes + " Passes</span><br />";
+    this.output += "<span style='color:red'>" + this.fails + " Fails</span><br />";
+    this.output += "<span style='color:red'>" + this.errors + " Errors</span><br />";
+    this.output += "Process took " + dur + "ms to complete<br />"
+    this.output += "</div>";
+    this.write(this.output + "<br />");
     document.getElementById("console_" + uniqId).style.border = "5px solid " + (this.passes > 0 && this.fails === 0 && this.errors === 0 ? "lime" : "red");
+  },
+  it: function (msg, fn) {
+    msg = msg || "should pass the tests below";
+    this.output += "<strong>" + msg + "</strong>";
+    this.output += "<div style='margin-left:20px'>";
+    try {
+      fn();
+    } catch (e) {
+      this.errors++;
+      this.output += "<span style='color:red'>" + e + "</span>";
+    }
+    this.output += "</div>";
   }
 };
