@@ -90,5 +90,31 @@ var Test = {
     msg = (msg || "Unexpected value was returned") + " - Value was expected to not equal: " + JSON.stringify(unexpected);
     success = (success || "Test Passed") + " - Value !== " + JSON.stringify(unexpected);
     this.expect(JSON.stringify(actual) !== JSON.stringify(unexpected), msg, success);
+  },
+  expectError: function (msg, fn, success) {
+    var errorThrown = !1;
+    msg = msg || "Expected error was not thrown";
+    success = success || "Test Passed";
+    try {
+      fn();
+    } catch (e) {
+      errorThrown = true;
+      this.output += e + "<br />";
+    } finally {
+      this.expect(errorThrown, msg, success);
+    }
+  },
+  expectNoError: function (msg, fn, success) {
+    var errorThrown = !1;
+    msg = msg || "Unexpected error thrown";
+    success = success || "Test Passed";
+    try {
+      fn();
+    } catch (e) {
+      errorThrown = true;
+      msg += " - " + e;
+    } finally {
+      this.expect(!errorThrown, msg, success);
+    }
   }
 };

@@ -102,13 +102,49 @@
         Test.assertNotSimilar({greet: "Hello World"}, {farewell: "Goodbye World"});
         Test.assertNotSimilar({farewell: "Goodbye World"}, {greet: "Hello World"});
         Test.assertNotSimilar({greet: "Hello World", farewell: "Goodbye World"}, {farewell: "Goodbye World", greet: "Hello World"});
-        
+
         // Failing
         Test.assertNotSimilar([1,2,3,4,5], [1,2,3,4,5]);
         Test.assertNotSimilar([5,3,1,2,4], [5,3,1,2,4]);
         Test.assertNotSimilar({greet: "Hello World"}, {"greet": "Hello World"});
         Test.assertNotSimilar({farewell: "Goodbye World"}, {"farewell": "Goodbye World"});
         Test.assertNotSimilar({greet: "Hello World", farewell: "Goodbye World"}, {"greet": "Hello World", "farewell": "Goodbye World"});
+      });
+      Test.it("should have a working Test.expectError", function () {
+        // Passing
+        Test.expectError("", function () {
+          "Hello World".sort();
+        });
+        Test.expectError("", function () {
+          (10).times(function (i) {
+            console.log(i);
+          });
+        }, "PASS");
+        // Failing
+        Test.expectError("", function () {
+          console.log("No Errors");
+        });
+        Test.expectError("FAIL", function () {
+          console.log("No Errors");
+        });
+      });
+      Test.it("should have a working Test.expectNoError", function () {
+        // Passing
+        Test.expectNoError("", function () {
+          console.log("No Errors");
+        });
+        Test.expectNoError("", function () {
+          console.log("No Errors");
+        }, "PASS");
+        // Failing
+        Test.expectNoError("", function () {
+          "Hello World".sort();
+        });
+        Test.expectNoError("FAIL", function () {
+          (10).times(function (i) {
+            console.log(i);
+          });
+        });
       });
     });
     </script>
