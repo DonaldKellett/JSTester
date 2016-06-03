@@ -80,5 +80,15 @@ var Test = {
     msg = (msg || "Unexpected value was returned") + " - Value was expected to not equal: " + unexpected;
     success = (success || "Test Passed") + " - Value !== " + unexpected;
     this.expect(actual !== unexpected, msg, success);
+  },
+  assertSimilar: function (actual, expected, msg, success) {
+    msg = (msg || "Actual value did not match Expected") + " - Expected: " + JSON.stringify(expected) + ", but instead got: " + JSON.stringify(actual);
+    success = (success || "Test Passed") + " - Value === " + JSON.stringify(expected);
+    this.expect(JSON.stringify(actual) === JSON.stringify(expected), msg, success);
+  },
+  assertNotSimilar: function (actual, unexpected, msg, success) {
+    msg = (msg || "Unexpected value was returned") + " - Value was expected to not equal: " + JSON.stringify(unexpected);
+    success = (success || "Test Passed") + " - Value !== " + JSON.stringify(unexpected);
+    this.expect(JSON.stringify(actual) !== JSON.stringify(unexpected), msg, success);
   }
 };

@@ -66,6 +66,50 @@
         Test.assertNotEquals(false, false, "FAIL");
         Test.assertNotEquals("Hello World", "Hello World", "FAIL");
       });
+      Test.it("should have a working Test.assertSimilar that works on arrays and objects", function () {
+        // Passing Tests with Default Message
+        Test.assertSimilar([1,2,3,4,5], [1,2,3,4,5]);
+        Test.assertSimilar([5,3,1,2,4], [5,3,1,2,4]);
+        Test.assertSimilar({greet: "Hello World"}, {"greet": "Hello World"});
+        Test.assertSimilar({farewell: "Goodbye World"}, {"farewell": "Goodbye World"});
+        Test.assertSimilar({greet: "Hello World", farewell: "Goodbye World"}, {"greet": "Hello World", "farewell": "Goodbye World"});
+
+        // Passing Tests with Custom Message
+        Test.assertSimilar([1,2,3,4,5], [1,2,3,4,5], "" , "PASS");
+        Test.assertSimilar([5,3,1,2,4], [5,3,1,2,4], "" , "PASS");
+        Test.assertSimilar({greet: "Hello World"}, {"greet": "Hello World"}, "" , "PASS");
+        Test.assertSimilar({farewell: "Goodbye World"}, {"farewell": "Goodbye World"}, "" , "PASS");
+        Test.assertSimilar({greet: "Hello World", farewell: "Goodbye World"}, {"greet": "Hello World", "farewell": "Goodbye World"}, "" , "PASS");
+
+        // Failing Tests with Default Message
+        Test.assertSimilar([1,2,3,4,5], [5,3,1,2,4]);
+        Test.assertSimilar([5,3,1,2,4], [1,2,3,4,5]);
+        Test.assertSimilar({greet: "Hello World"}, {farewell: "Goodbye World"});
+        Test.assertSimilar({farewell: "Goodbye World"}, {greet: "Hello World"});
+        Test.assertSimilar({greet: "Hello World", farewell: "Goodbye World"}, {farewell: "Goodbye World", greet: "Hello World"});
+
+        // Failing Tests with Custom Message
+        Test.assertSimilar([1,2,3,4,5], [5,3,1,2,4], "EPIC FAIL");
+        Test.assertSimilar([5,3,1,2,4], [1,2,3,4,5], "EPIC FAIL");
+        Test.assertSimilar({greet: "Hello World"}, {farewell: "Goodbye World"}, "EPIC FAIL");
+        Test.assertSimilar({farewell: "Goodbye World"}, {greet: "Hello World"}, "EPIC FAIL");
+        Test.assertSimilar({greet: "Hello World", farewell: "Goodbye World"}, {farewell: "Goodbye World", greet: "Hello World"}, "EPIC FAIL");
+      });
+      Test.it("should have a working Test.assertNotSimilar that works for arrays", function () {
+        // Passing
+        Test.assertNotSimilar([1,2,3,4,5], [5,3,1,2,4]);
+        Test.assertNotSimilar([5,3,1,2,4], [1,2,3,4,5]);
+        Test.assertNotSimilar({greet: "Hello World"}, {farewell: "Goodbye World"});
+        Test.assertNotSimilar({farewell: "Goodbye World"}, {greet: "Hello World"});
+        Test.assertNotSimilar({greet: "Hello World", farewell: "Goodbye World"}, {farewell: "Goodbye World", greet: "Hello World"});
+        
+        // Failing
+        Test.assertNotSimilar([1,2,3,4,5], [1,2,3,4,5]);
+        Test.assertNotSimilar([5,3,1,2,4], [5,3,1,2,4]);
+        Test.assertNotSimilar({greet: "Hello World"}, {"greet": "Hello World"});
+        Test.assertNotSimilar({farewell: "Goodbye World"}, {"farewell": "Goodbye World"});
+        Test.assertNotSimilar({greet: "Hello World", farewell: "Goodbye World"}, {"greet": "Hello World", "farewell": "Goodbye World"});
+      });
     });
     </script>
   </body>
