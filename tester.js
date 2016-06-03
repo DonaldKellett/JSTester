@@ -69,5 +69,16 @@ var Test = {
       this.fails++;
       this.output += "<span style='color:red'>" + msg + "</span><br />";
     }
+  },
+  // Assertion Methods
+  assertEquals: function (actual, expected, msg, success) {
+    msg = (msg || "Actual value did not match Expected") + " - Expected: " + expected + ", but instead got: " + actual;
+    success = (success || "Test Passed") + " - Value === " + expected;
+    this.expect(actual === expected, msg, success);
+  },
+  assertNotEquals: function (actual, unexpected, msg, success) {
+    msg = (msg || "Unexpected value was returned") + " - Value was expected to not equal: " + unexpected;
+    success = (success || "Test Passed") + " - Value !== " + unexpected;
+    this.expect(actual !== unexpected, msg, success);
   }
 };

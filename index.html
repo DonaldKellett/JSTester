@@ -7,17 +7,64 @@
   </head>
   <body>
     <script>
-    Test.describe("This test run", function () {
-      Test.it("should pass with no errors", function () {
-        Test.expect(true);
-        Test.expect(true);
-        Test.expect(false);
-        Test.expect(true);
-        Test.expect(true);
-        Test.expect(false);
-        Test.expect(true);
-        Test.expect(true);
-        Test.expect(false);
+    Test.describe("JSTester", function () {
+      Test.it("should have a working Test.assertEquals for both passing and failing tests", function () {
+        // Passing Tests with default Message
+        Test.assertEquals(1, 1);
+        Test.assertEquals(0, 0);
+        Test.assertEquals(true, true);
+        Test.assertEquals(false, false);
+        Test.assertEquals("Hello World", "Hello World");
+
+        // Passing Tests with Custom Message
+        Test.assertEquals(1, 1, "", "Good job, the correct value was returned");
+        Test.assertEquals(0, 0, "", "Good job, the correct value was returned");
+        Test.assertEquals(true, true, "", "Good job, the correct value was returned");
+        Test.assertEquals(false, false, "", "Good job, the correct value was returned");
+        Test.assertEquals("Hello World", "Hello World", "", "Good job, the correct value was returned");
+
+        // Failing tests with default message
+        Test.assertEquals(1, 0);
+        Test.assertEquals(0, 1);
+        Test.assertEquals(true, false);
+        Test.assertEquals(false, true);
+        Test.assertEquals("Hello World", "bacon");
+
+        // Failing tests with custom message
+        Test.assertEquals(1, 0, "Your code did not return the correct value, try again");
+        Test.assertEquals(0, 1, "Your code did not return the correct value, try again");
+        Test.assertEquals(true, false, "Your code did not return the correct value, try again");
+        Test.assertEquals(false, true, "Your code did not return the correct value, try again");
+        Test.assertEquals("Hello World", "bacon", "Your code did not return the correct value, try again");
+      });
+      Test.it("should have a working Test.assertNotEquals that works for both passing and failing tests", function () {
+        // Passing Tests with Default Message
+        Test.assertNotEquals(1, 0);
+        Test.assertNotEquals(0, 1);
+        Test.assertNotEquals(true, false);
+        Test.assertNotEquals(false, true);
+        Test.assertNotEquals("bacon", "Hello World");
+
+        // Passing Tests with Custom Message
+        Test.assertNotEquals(1, 0, "", "PASS");
+        Test.assertNotEquals(0, 1, "", "PASS");
+        Test.assertNotEquals(true, false, "", "PASS");
+        Test.assertNotEquals(false, true, "", "PASS");
+        Test.assertNotEquals("bacon", "Hello World", "", "PASS");
+
+        // Failing Tests with Default Message
+        Test.assertNotEquals(1, 1);
+        Test.assertNotEquals(0, 0);
+        Test.assertNotEquals(true, true);
+        Test.assertNotEquals(false, false);
+        Test.assertNotEquals("Hello World", "Hello World");
+
+        // Failing Tests with Custom Message
+        Test.assertNotEquals(1, 1, "FAIL");
+        Test.assertNotEquals(0, 0, "FAIL");
+        Test.assertNotEquals(true, true, "FAIL");
+        Test.assertNotEquals(false, false, "FAIL");
+        Test.assertNotEquals("Hello World", "Hello World", "FAIL");
       });
     });
     </script>
