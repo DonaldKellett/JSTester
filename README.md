@@ -1,5 +1,7 @@
 # JSTester
 
+[![Join the chat at https://gitter.im/DonaldKellett/JSTester](https://badges.gitter.im/DonaldKellett/JSTester.svg)](https://gitter.im/DonaldKellett/JSTester?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A simple custom Javascript TDD Framework that requires minimal setup.  Open Source
 
 ## Initialization
